@@ -1,0 +1,6 @@
+# Python dependencies 
+fastapi
+uvicorn[standard]
+huggingface_hub
+python-dotenv  # For .env file
+# Add others as you need them, e.g., cachetools
