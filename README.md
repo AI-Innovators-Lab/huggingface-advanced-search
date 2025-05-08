@@ -148,3 +148,23 @@ huggingface-advanced-search/
 ## Using the Application
 
 1.  Open your browser and navigate to the frontend URL (e.g., `http://localhost:5175`).
+2.  Use the search bar to find models.
+3.  Apply filters using the dropdowns for Sort By, Pipeline Tag, and Library.
+4.  Click on a model in the list to view its detailed information.
+    - If a model lacks GGUF files, a hint will guide you on potential conversion methods.
+5.  On the search results page, check the boxes next to 2 or 3 models and click "Compare Selected" to see a side-by-side comparison.
+
+## API Endpoints (Backend)
+
+The backend exposes the following main endpoints:
+
+-   `GET /api/search/models`: Searches for models based on query parameters (query, sort_by, page, page_size, pipeline_tag, library).
+-   `GET /api/models/{author}/{name}`: Retrieves detailed information for a specific model.
+-   `GET /api/models/{author}/{name}/config`: Retrieves the configuration for a specific model.
+-   `GET /api/models/{author}/{name}/gguf`: Retrieves GGUF file information for a specific model.
+-   `GET /api/meta/pipeline-tags`: Retrieves a list of available pipeline tags.
+-   `GET /api/meta/libraries`: Retrieves a list of available libraries.
+
+(The frontend primarily uses the first two for search and details, and the last two for filter options).
+
+
