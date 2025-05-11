@@ -198,3 +198,29 @@ def get_model_details_from_hub(model_id: str) -> Optional[ModelDetailResponse]:
                     license=card_dict.get('license'),
                     language=card_dict.get('language'), # Assuming it's already a list or None
                     tags=card_dict.get('tags'),         # Assuming it's already a list or None
+                    model_index=card_dict.get('model-index') # Common key for eval results
+                    # card_data_raw = card_dict # If you want to pass everything
+                )
+                logger.info(f"Processed model card data for {model_id}")
+            except Exception as e_card:
+                logger.error(f"Error processing cardData for {model_id}: {e_card}", exc_info=True)
+
+
+        response_data = ModelDetailResponse(
+            id=info.id,
+            author=info.author,
+            lastModified=info.lastModified,
+            tags=info.tags,
+            pipelineTag=info.pipeline_tag,
+            downloads=info.downloads,
+            likes=info.likes,
+            readme_content=readme_content,
+            gguf_files=gguf_files_details,
+            card_data=parsed_card_data,
+            siblings=raw_siblings_info
+        )
+        return response_data
+    except Exception as e:
+        logger.error(f"An unexpected error occurred fetching details for {model_id}: {e}", exc_info=True)
+        # In a real app, you might want to raise an HTTPException that the router can catch
+        raise # Re-raise for now, router will handle with 500 or specific mapping
